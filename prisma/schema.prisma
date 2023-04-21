@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FoodAccess {
+  NORMAL
+  LOW
+  EXTREMELY_LOW
+}
+
+enum DonationType {
+  COMMON
+  UNCOMMON
+}
+
+enum LastDonation {
+  WEEK_1
+  WEEKS_2
+  WEEKS_3
+  WEEKS_4
+  WEEKS_5
+  WEEKS_6
+  WEEKS_7
+  WEEKS_8
+  WEEKS_9
+  WEEKS_10
+  WEEKS_11
+  WEEKS_12
+  NEVER
+}
+
+model Model {
+  id               Int     @id @default(autoincrement())
+  travelTime       Int
+  organizationSize Int
+  foodAccess       Int
+  povertyRate      Int
+  incomeLevel      Int
+  lastDonation     Int
+  donationType     Int
+  chosen           Boolean @default(false)
+}
+
+model Organization {
+  id               Int          @id @default(autoincrement())
+  travelTime       Int
+  organizationSize Int
+  foodAccess       FoodAccess
+  povertyRate      Int
+  incomeLevel      Int
+  lastDonation     LastDonation
+  donationType     DonationType
+  name             String
+}
+
+model Donation {
+  id Int @id @default(autoincrement())
+}
