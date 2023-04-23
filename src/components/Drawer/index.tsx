@@ -48,7 +48,7 @@ export default function Drawer() {
         alt="Food Rescue Logo"
       />
       <TabGroup>
-        {/* <Tab
+        <Tab
           key="tab-0"
           index={0}
           icon={faChartLine}
@@ -56,7 +56,7 @@ export default function Drawer() {
           onClick={() => push('/')}
           text="Dashboard"
         />
-        <Tab
+        {/* <Tab
           key="tab-1"
           index={0}
           icon={faCircleInfo}
