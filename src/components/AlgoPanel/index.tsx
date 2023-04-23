@@ -13,9 +13,8 @@ export default function AlgoPanel() {
     const data = await fetch(`/api/model/choose/${selected}`, {
       method: 'PUT',
     });
-    console.log(data)
-    push('/tryit/allocate')
-  }
+    push('/tryit/allocate');
+  };
   return (
     <div>
       <div className="text-left opacity-50 mt-6">
@@ -26,7 +25,9 @@ export default function AlgoPanel() {
         <Model id={2} selected={selected === 2} onClick={select} />
       </div>
       <div className="text-right mt-10">
-        <Button icon={faArrowRight} onClick={handleClick}>Choose This Model</Button>
+        <Button icon={faArrowRight} onClick={handleClick} disabled={!selected}>
+          Choose This Model
+        </Button>
       </div>
     </div>
   );

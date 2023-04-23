@@ -11,7 +11,6 @@ function Item({ label, value }: { label: string; value: string }) {
 }
 export default function OrgContent({ data }: any) {
   const labels = Object.keys(data);
-  console.log(labels);
   return (
     <div className="flex flex-col">
       {labels.map((label, index) => (

@@ -22,7 +22,6 @@ export default function EditPage() {
     }
   }, [data]);
 
-  console.log(values);
   const handleChange =
     (field: string) => (event: Event, newValue: number | number[]) => {
       setValues({ ...values, [field]: newValue });

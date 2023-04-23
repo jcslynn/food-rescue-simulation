@@ -21,7 +21,6 @@ export default async function handle(
   }
   if (req.method === 'PUT') {
     const body = JSON.parse(req.body)
-    console.log(body)
     const model = await prisma.model.update({
       where: { id: Number(id)},
       data: body

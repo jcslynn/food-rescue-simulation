@@ -19,7 +19,7 @@ export default async function handle(
     // const { searchString } = req.query
     const orgs = await prisma.organization.findMany();
     const orgString = orgs.reduce(
-      (prev, cur) => prev + JSON.stringify(cur) + '\n',
+      (prev, cur) => prev + '\n' + JSON.stringify(cur),
       ''
     );
     const chosenModel = await prisma.model.findFirst({
@@ -39,7 +39,6 @@ export default async function handle(
       orgs: orgString,
       model: JSON.stringify(chosenModel),
     });
-    console.log(prompt);
     try {
       const completion = await openai.createCompletion({
         model: 'text-davinci-003',
@@ -55,21 +54,20 @@ export default async function handle(
         // @ts-ignore
         return res.status(200).json({ ...resultOrg, score });
       } else {
-        return res.status(404);
+        throw new Error('No results');
       }
     } catch (error: any) {
       // Consider adjusting the error handling logic for your use case
       if (error.response) {
         console.error(error.response.status, error.response.data);
-        return res.status(error.response.status).json(error.response.data);
+        const e = Error(error.response.data);
+        // e.status = error.response.status;
+        throw e;
       } else {
         console.error(`Error with OpenAI API request: ${error.message}`);
-        return res.status(500).json({
-          // @ts-ignore
-          error: {
-            message: 'An error occurred during your request.',
-          },
-        });
+        const e = Error('An error occurred during your request.');
+        // e.status = 500;
+        throw e;
       }
     }
   }
@@ -77,8 +75,7 @@ export default async function handle(
 }
 
 function generatePrompt({ orgs, model }: { orgs: string; model: string }) {
-  return `I want to allocate food donations to one of the following organizations:
-  ${orgs}.
+  return `I want to allocate food donations to one of the following organizations:${orgs}.
   My preference model across the given feature sets are:
   ${model}.
   Give me the Borda score and id of the organization I should donate to, in the format of { "id": x, "score": y}?`;

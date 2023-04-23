@@ -2,7 +2,7 @@ import { faArrowRight, faRotateBack } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable'
 import OrgContent from '../OrgList/content';
 import Card from '../Card';
 import fetcher from '@/utils/fetcher';
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 
 export default function ResultsPanel() {
   const { push } = useRouter();
-  const { data, error } = useSWR('/api/allocation/', fetcher);
+  const { data, error } = useSWRImmutable('/api/allocation', fetcher);
   if (error) return <div>Failed to Load</div>;
   if (!data)
     return (

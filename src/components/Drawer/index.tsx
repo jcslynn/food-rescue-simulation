@@ -48,7 +48,7 @@ export default function Drawer() {
         alt="Food Rescue Logo"
       />
       <TabGroup>
-        <Tab
+        {/* <Tab
           key="tab-0"
           index={0}
           icon={faChartLine}
@@ -63,7 +63,7 @@ export default function Drawer() {
           selected={selectedTab === 1}
           onClick={() => push('/about')}
           text="About the Model"
-        />
+        /> */}
         <Tab
           key="tab-2"
           index={1}
@@ -72,14 +72,14 @@ export default function Drawer() {
           onClick={() => push('/tryit')}
           text="Try it out"
         />
-        <Tab
+        {/* <Tab
           key="tab-3"
           index={2}
           icon={faPersonRunning}
           selected={selectedTab === 3}
           onClick={() => push('/simulation')}
           text="Simulate"
-        />
+        /> */}
       </TabGroup>
     </DrawerWrapper>
   );

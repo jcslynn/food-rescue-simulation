@@ -64,7 +64,6 @@ function Organizations() {
     return <div>Failed to load</div>
   if (!data) return <Skeleton />
   const orgs = [data[0],data[1], data[2]]
-  console.log(data)
   return (
     <div className="flex flex-row mt-4 justify-between m-auto w-fit">
       {
